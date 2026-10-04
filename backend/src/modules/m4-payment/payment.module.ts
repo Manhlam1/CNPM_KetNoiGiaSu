@@ -19,6 +19,6 @@ import { WithdrawalsService } from './withdrawals.service';
   imports: [TypeOrmModule.forFeature([Payment, Wallet, WalletTransaction, Withdrawal, Booking])],
   controllers: [PaymentsController, WalletsController, WithdrawalsController, AdminFinanceController],
   providers: [PaymentsService, EscrowService, WalletService, WithdrawalsService],
-  exports: [EscrowService, WalletService, PaymentsService],
+  exports: [EscrowService, WalletService, PaymentsService, WithdrawalsService],
 })
 export class PaymentModule {}

@@ -5,6 +5,7 @@ import { ScheduleModule } from '@nestjs/schedule';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { CommonModule } from './common/common.module';
 import { cfg } from './config/configuration';
+import { SeedModule } from './database/seed.module';
 import { DemoModule } from './modules/demo/demo.module';
 import { AccountModule } from './modules/m1-account/account.module';
 import { SystemConfigModule } from './modules/m1-account/system-config/system-config.module';
@@ -39,6 +40,7 @@ import { CommunicationModule } from './modules/m5-communication/communication.mo
     BookingModule,
     CommunicationModule,
     DemoModule,
+    SeedModule,
   ],
 })
 export class AppModule {}
