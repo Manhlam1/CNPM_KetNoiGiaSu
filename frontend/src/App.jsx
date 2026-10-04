@@ -30,6 +30,10 @@ import { WithdrawalsPage } from './pages/admin/WithdrawalsPage';
 import { DemoToolsPage } from './pages/admin/DemoToolsPage';
 import { MessagesPage } from './pages/app/MessagesPage';
 import { NotificationsPage } from './pages/app/NotificationsPage';
+import { DisputesPage } from './pages/app/DisputesPage';
+import { DisputeNewPage } from './pages/app/DisputeNewPage';
+import { DisputeDetailPage } from './pages/app/DisputeDetailPage';
+import { AdminDisputesPage } from './pages/admin/AdminDisputesPage';
 
 const ADMIN = ['ADMIN'];
 const TUTOR = ['TUTOR'];
@@ -58,6 +62,11 @@ export default function App() {
         <Route path="messages" element={<RequireAuth roles={['STUDENT', 'TUTOR']}><MessagesPage /></RequireAuth>} />
         <Route path="messages/:id" element={<RequireAuth roles={['STUDENT', 'TUTOR']}><MessagesPage /></RequireAuth>} />
         <Route path="notifications" element={<NotificationsPage />} />
+        <Route path="disputes" element={<RequireAuth roles={['STUDENT', 'TUTOR']}><DisputesPage /></RequireAuth>} />
+        <Route path="disputes/new" element={<RequireAuth roles={STUDENT}><DisputeNewPage /></RequireAuth>} />
+        <Route path="disputes/:id" element={<DisputeDetailPage />} />
+        <Route path="admin/disputes" element={<RequireAuth roles={ADMIN}><AdminDisputesPage /></RequireAuth>} />
+        <Route path="admin/disputes/:id" element={<RequireAuth roles={ADMIN}><DisputeDetailPage /></RequireAuth>} />
         <Route path="bookings" element={<BookingsPage />} />
         <Route path="bookings/:id" element={<BookingDetailPage />} />
         <Route path="payments" element={<RequireAuth roles={STUDENT}><PaymentsPage /></RequireAuth>} />

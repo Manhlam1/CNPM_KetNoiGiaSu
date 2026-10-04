@@ -8,6 +8,8 @@ import { AuditInterceptor } from '../../common/interceptors/audit.interceptor';
 import { cfg } from '../../config/configuration';
 import { AuditController } from './audit/audit.controller';
 import { AuditService } from './audit/audit.service';
+import { DashboardController } from './dashboard/dashboard.controller';
+import { DashboardService } from './dashboard/dashboard.service';
 import { AuthController, ProfileController } from './auth/auth.controller';
 import { AuthService } from './auth/auth.service';
 import { OtpService } from './auth/otp.service';
@@ -31,12 +33,13 @@ import { UsersService } from './users/users.service';
       useFactory: () => ({ secret: cfg().jwt.secret, signOptions: { expiresIn: cfg().jwt.expiresIn as any } }),
     }),
   ],
-  controllers: [AuthController, ProfileController, AdminUsersController, AuditController, SystemConfigController],
+  controllers: [AuthController, ProfileController, AdminUsersController, AuditController, SystemConfigController, DashboardController],
   providers: [
     AuthService,
     OtpService,
     UsersService,
     AuditService,
+    DashboardService,
     { provide: APP_GUARD, useClass: JwtAuthGuard },
     { provide: APP_GUARD, useClass: RolesGuard },
     { provide: APP_INTERCEPTOR, useClass: AuditInterceptor },

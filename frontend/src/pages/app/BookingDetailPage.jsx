@@ -126,6 +126,46 @@ function ReviewBox({ b, onDone }) {
   );
 }
 
+function TutorReviewBox({ review, onDone }) {
+  const toast = useToast();
+  const [reply, setReply] = useState('');
+  const [busy, setBusy] = useState(false);
+  const send = async () => {
+    setBusy(true);
+    try {
+      await reviewApi.reply(review.id, reply.trim());
+      toast.success('Đã gửi phản hồi');
+      onDone();
+    } catch (err) {
+      toast.error(err.message);
+    } finally {
+      setBusy(false);
+    }
+  };
+  return (
+    <Panel title="Học viên đánh giá">
+      <div className="flex items-start gap-4">
+        <GradeMark score={review.rating} />
+        <div className="flex-1">
+          <p className="text-ink-soft">{review.comment || 'Không có nhận xét.'}</p>
+          {review.tutorReply ? (
+            <p className="mt-2 border-l-2 border-violet pl-3 text-sm text-ink-soft">Bạn đã phản hồi: {review.tutorReply}</p>
+          ) : (
+            <div className="mt-3 flex flex-col gap-2">
+              <Textarea rows={2} value={reply} onChange={(e) => setReply(e.target.value)} maxLength={1000} placeholder="Cảm ơn học viên hoặc giải thích thêm (hiện công khai trên hồ sơ)" aria-label="Phản hồi đánh giá" />
+              <div>
+                <Button size="sm" variant="secondary" loading={busy} disabled={reply.trim().length < 2} onClick={send}>
+                  Gửi phản hồi
+                </Button>
+              </div>
+            </div>
+          )}
+        </div>
+      </div>
+    </Panel>
+  );
+}
+
 export function BookingDetailPage() {
   const { id } = useParams();
   const { user } = useAuth();
@@ -225,7 +265,7 @@ export function BookingDetailPage() {
         <Alert tone={b.dispute.status === 'OPEN' ? 'bad' : 'neutral'} className="mb-6">
           Khiếu nại ({DISPUTE_CATEGORY[b.dispute.category]}): <StatusBadge map={DISPUTE_STATUS} value={b.dispute.status} />{' '}
           {b.dispute.resolutionNote && <span>· {b.dispute.resolutionNote}</span>}{' '}
-          <Link to={`/app/disputes`} className="font-medium underline">
+          <Link to={`/app/${user.role === 'ADMIN' ? 'admin/' : ''}disputes/${b.dispute.id}`} className="font-medium underline">
             Xem khiếu nại
           </Link>
         </Alert>
@@ -281,14 +321,7 @@ export function BookingDetailPage() {
           )}
 
           {!isTutor && <ReviewBox b={b} onDone={() => reload({ silent: true })} />}
-          {isTutor && b.review && (
-            <Panel title="Học viên đánh giá">
-              <div className="flex items-start gap-4">
-                <GradeMark score={b.review.rating} />
-                <p className="text-ink-soft">{b.review.comment || 'Không có nhận xét.'}</p>
-              </div>
-            </Panel>
-          )}
+          {isTutor && b.review && <TutorReviewBox review={b.review} onDone={() => reload({ silent: true })} />}
         </div>
         <MoneyPanel b={b} viewerRole={isTutor ? 'TUTOR' : user.role} />
       </div>

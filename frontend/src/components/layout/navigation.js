@@ -22,6 +22,7 @@ export const NAV = {
     { to: '/app/bookings', label: 'Buổi dạy', icon: CalendarCheck },
     { to: '/app/messages', label: 'Tin nhắn', icon: MessageCircle, badge: 'messages' },
     { to: '/app/wallet', label: 'Ví', icon: Wallet },
+    { to: '/app/disputes', label: 'Khiếu nại', icon: ShieldAlert },
     { to: '/app/notifications', label: 'Thông báo', icon: Bell, badge: 'notifications' },
     { to: '/app/profile', label: 'Tài khoản', icon: UserRound },
   ],
