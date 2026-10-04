@@ -247,3 +247,4 @@ Danh sách file của từng module: [docs/MODULES.md](docs/MODULES.md).
 ## 13. Bảo mật cấu hình
 
 File `.env` chứa mật khẩu DB, `JWT_SECRET`, secret VNPay và đã nằm trong `.gitignore`. Repo chỉ chứa `.env.example`. Trước khi push, chạy `git status` để chắc chắn không có file `.env` nào được thêm vào.
+# CNPM_KetNoiGiaSu
