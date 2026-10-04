@@ -9,6 +9,8 @@ import { DemoModule } from './modules/demo/demo.module';
 import { AccountModule } from './modules/m1-account/account.module';
 import { SystemConfigModule } from './modules/m1-account/system-config/system-config.module';
 import { TutorModule } from './modules/m2-tutor/tutor.module';
+import { BookingModule } from './modules/m3-booking/booking.module';
+import { PaymentModule } from './modules/m4-payment/payment.module';
 import { NotificationModule } from './modules/m5-communication/notification.module';
 
 @Module({
@@ -32,6 +34,8 @@ import { NotificationModule } from './modules/m5-communication/notification.modu
     AccountModule,
     NotificationModule,
     TutorModule,
+    PaymentModule,
+    BookingModule,
     DemoModule,
   ],
 })

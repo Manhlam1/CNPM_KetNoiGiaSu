@@ -2,7 +2,8 @@
 import { http } from './client';
 
 export const chatApi = {
-  start: (tutorUserId) => http.post('/conversations', { tutorUserId }),
+  /** Mở (hoặc lấy lại) hội thoại với người dùng kia: học viên <-> gia sư */
+  start: (userId) => http.post('/conversations', { userId }),
   list: () => http.get('/conversations'),
   messages: (id, params) => http.get(`/conversations/${id}/messages`, params),
   send: (id, content) => http.post(`/conversations/${id}/messages`, { content }),
