@@ -12,6 +12,7 @@ import { TutorModule } from './modules/m2-tutor/tutor.module';
 import { BookingModule } from './modules/m3-booking/booking.module';
 import { PaymentModule } from './modules/m4-payment/payment.module';
 import { NotificationModule } from './modules/m5-communication/notification.module';
+import { CommunicationModule } from './modules/m5-communication/communication.module';
 
 @Module({
   imports: [
@@ -36,6 +37,7 @@ import { NotificationModule } from './modules/m5-communication/notification.modu
     TutorModule,
     PaymentModule,
     BookingModule,
+    CommunicationModule,
     DemoModule,
   ],
 })

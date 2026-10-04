@@ -28,6 +28,8 @@ import { AdminBookingsPage } from './pages/admin/AdminBookingsPage';
 import { FinancePage } from './pages/admin/FinancePage';
 import { WithdrawalsPage } from './pages/admin/WithdrawalsPage';
 import { DemoToolsPage } from './pages/admin/DemoToolsPage';
+import { MessagesPage } from './pages/app/MessagesPage';
+import { NotificationsPage } from './pages/app/NotificationsPage';
 
 const ADMIN = ['ADMIN'];
 const TUTOR = ['TUTOR'];
@@ -53,6 +55,9 @@ export default function App() {
       <Route path="/app" element={<RequireAuth><AppLayout /></RequireAuth>}>
         <Route index element={<DashboardPage />} />
         <Route path="profile" element={<ProfilePage />} />
+        <Route path="messages" element={<RequireAuth roles={['STUDENT', 'TUTOR']}><MessagesPage /></RequireAuth>} />
+        <Route path="messages/:id" element={<RequireAuth roles={['STUDENT', 'TUTOR']}><MessagesPage /></RequireAuth>} />
+        <Route path="notifications" element={<NotificationsPage />} />
         <Route path="bookings" element={<BookingsPage />} />
         <Route path="bookings/:id" element={<BookingDetailPage />} />
         <Route path="payments" element={<RequireAuth roles={STUDENT}><PaymentsPage /></RequireAuth>} />
