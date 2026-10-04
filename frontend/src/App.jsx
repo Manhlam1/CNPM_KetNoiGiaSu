@@ -13,14 +13,21 @@ import { ProfilePage } from './pages/app/ProfilePage';
 import { UsersPage } from './pages/admin/UsersPage';
 import { ConfigsPage } from './pages/admin/ConfigsPage';
 import { AuditLogsPage } from './pages/admin/AuditLogsPage';
+import { TutorApplicationsPage } from './pages/admin/TutorApplicationsPage';
+import { TutorSearchPage } from './pages/public/TutorSearchPage';
+import { TutorDetailPage } from './pages/public/TutorDetailPage';
+import { TutorProfilePage } from './pages/tutor/TutorProfilePage';
 
 const ADMIN = ['ADMIN'];
+const TUTOR = ['TUTOR'];
 
 export default function App() {
   return (
     <Routes>
       <Route element={<PublicLayout />}>
         <Route path="/" element={<HomePage />} />
+        <Route path="/tutors" element={<TutorSearchPage />} />
+        <Route path="/tutors/:id" element={<TutorDetailPage />} />
         <Route path="/dev/mailbox" element={<MailboxPage />} />
       </Route>
 
@@ -32,6 +39,8 @@ export default function App() {
       <Route path="/app" element={<RequireAuth><AppLayout /></RequireAuth>}>
         <Route index element={<DashboardPage />} />
         <Route path="profile" element={<ProfilePage />} />
+ <Route path="tutor/profile" element={<RequireAuth roles={TUTOR}><TutorProfilePage /></RequireAuth>} />
+        <Route path="admin/tutors" element={<RequireAuth roles={ADMIN}><TutorApplicationsPage /></RequireAuth>} />
         <Route path="admin/users" element={<RequireAuth roles={ADMIN}><UsersPage /></RequireAuth>} />
         <Route path="admin/configs" element={<RequireAuth roles={ADMIN}><ConfigsPage /></RequireAuth>} />
         <Route path="admin/audit-logs" element={<RequireAuth roles={ADMIN}><AuditLogsPage /></RequireAuth>} />
